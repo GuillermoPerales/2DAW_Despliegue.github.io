@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Guillermo Perales</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="jumbotron text-center" id="jumbofix">
+        <h1>2º DAW Despliegue de Aplicaciones</h1>
+        <p>Practicas por: Guillermo Perales Marti</p>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Logo</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Practicas
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="practica1.html">Practica 1</a>
+                    <a class="dropdown-item" href="#">Practica 2</a>
+
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4 col-sm">
+                <h3>Practica 2</h3>
+                <p><b>En esta practica, vamos a simular el sistema de ramificaciones propuesto por Vincent Driessen
+                        (Gitflow)</b></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-sm">
+
+                <ul style="list-style: upper-roman;">
+                    <li>Crear un repositorio con las ramas de Master y develop usando Git-flow
+                        <ul>
+                            <li>Instala Git-flow<br>
+                                <p class="code">$sudo apt-get install git-flow</p>
+                            </li>
+                            <li>Inicializa un repositori de Git vacio y establece la configuracion de las ramas<br>
+                                <p class="code">$git flow init</p><br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-01.png" alt="practica2-01"><br>
+                            </li>
+                            <li>
+                                <p>Creamos el repositorio online y hacemos el primer commit</p><br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-02.png" alt="practica2-02"><br><br>
+
+                                <p class="code">$git add fichero_prncipal.txt<br>
+                                    $git commit -m "Add fichero principal"<br>
+                                    $git push --set-upstream origin develop
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Generar diferentes features con pequeños cambios en el proyecto. Algunas
+                        de las features deben modificar un mismo fichero
+                        <ul>
+                            <li>Creamos las features con sus archivos, modificamos algunos y las subimos<br>
+                                <p class="code">$git flow feature start feature_01</p>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-03-1.png"
+                                    alt="practica2-03-1"><br><br>
+
+                                <p class="code">$git checkout feature/feature_01</p>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-04.png" alt="practica2-04"><br><br>
+                                <p class="code">$git add<br>
+                                    $git commit -m<br>
+                                    $git push</p>
+                                <p class="code">$git flow feature start feature_02</p>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-03-2.png"
+                                    alt="practica2-03-2"><br><br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-05.png" alt="practica2-05"><br><br>
+                                <p class="code">$git add<br>
+                                    $git commit -m<br>
+                                    $git push</p>
+                            </li>
+                            <li>
+                                Ahora finalizamos las features
+                                <p class="code">$git flow feature finish feature_01</p><br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-06.png" alt="practica2-06"><br><br>
+                                <p class="code">$git flow feature finish feature_02</p><br>
+                                <img src="/2DAW_Despliegue.github.io/img/practia2-08.png" alt="practica2-08"><br><br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-07.png" alt="practica2-07"><br><br>
+                                <p class="code">$git push</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Creamos una nueva release con todas las features creadas.
+                        <ul>
+                            <li>
+                                <p class="code">$git flow release start release_01</p><br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-09.png" alt="practica2-09"><br><br>
+                            </li>
+                            <li>Hacemos el push de la release<br>
+                                <p class="code">$git add ."<br>
+                                    $git commit -m "Subida release"<br>
+                                    $git push</p>
+                            </li>
+                            <li>Creamos el tag de la version y hacemos el push<br>
+                                <p class="code">$git tag -a NombreTag -m "Comentario"<br>
+                                    $git push --tag</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Simular la existencia de un error en producción y solucionarlo por medio de
+                        un hotfix.
+                        <ul>
+                            <li>
+                                Creamos una rama de hotfix
+                                <p class="code">$git flow hotfix start hotfix01</p><br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica2-10.png" alt="practica2-10"><br><br>
+                            </li>
+                            <li>
+                                Modificamos y solucionamos los errores
+                            </li>
+                            <li>
+                                Finalizamos el hotfix
+                                <p class="code">$git flow hotfix finish hotfix01</p>
+                            </li>
+
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+</body>
+
+</html>

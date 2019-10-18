@@ -1,7 +1,7 @@
 #jumbofix{
     margin: 0px;
 }
-#code{
+.code{
     color:green;
     border:3px solid lightslategrey;
     background-color: black;
