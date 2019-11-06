@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Guillermo Perales</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="jumbotron text-center" id="jumbofix">
+        <h1>2º DAW Despliegue de Aplicaciones</h1>
+        <p>Practicas por: Guillermo Perales Marti</p>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Logo</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Practicas
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="practica1.html">Git Lab</a>
+                    <a class="dropdown-item" href="practica2.html">Git Flow</a>
+
+
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4 col-sm">
+                <h3>Practica 3</h3>
+                <p><b>Documentar correctamente el proceso de instalación y configuración de un servidor apache
+                        que dispone de dos sitios web con las siguientes características:</b></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-sm">
+
+                <ul style="list-style: upper-roman;">
+                    <li>Instalar el Apache
+                        <ul>
+                            <li>
+                                <p class="code">$sudo apt-get install apache2</p>
+                            </li>
+                            <li>Como encender parar y reiniciar<br>
+                                <p class="code">Arranque $sudo /etc/init.d/apache2 start<br>
+                                    Parada $sudo /etc/init.d/apache2 stop<br>
+                                    Reinicio $sudo /etc/init.d/apache2 restart
+                                </p>
+                            </li>
+
+                        </ul>
+
+                    </li>
+                    <li>Publicar la web en el puerto 82
+                        <ul>
+                            <li>Entrar en el archivo port.conf y modificar el puerto
+                                <p class="code">$nano /etc/apache2/ports.conf</p><br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica3-01.png" alt="practica3-01"><br><br>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>Creamos el host virtual
+                        <ul>
+                            <li>
+                                Creamos directorio del host
+                                <p class="code">$sudo mkdir -p /var/www/practica03/html</p><br>
+                            </li>
+                            <li>
+                                Otorgamos permisos para usuarios distintos de root
+                                <p class="code">$sudo chwon -R $USER:$USER /var/www/practica03/html</p><br>
+                            </li>
+                            <li>
+                                Modificamos los perisos en el directorio /var/www para asegurarnos de que el acceso esta
+                                habilitado.
+                                <p class="code">$sudo chmod -R 755 /var/www</p>
+                            </li>
+                            <li>
+                                Creamos el index.php y lo editamos
+                                <p class="code">$nano /var/www/practica03/html/index.php</p>
+                                <img src="/2DAW_Despliegue.github.io/img/practica3-02.png" alt="practica3-02"><br><br>
+                            </li>
+                            <li>
+                                Creamos el archivo .conf para el sitio, para ello copiamos el default de apache
+                                <p class="code">$sudo nano /etc/apache2/sites-available/practica3.conf</p>
+                            </li>
+                            <li>
+                                Habilitamos los nuevos virtual host y reiniciamos
+                                <p class="code">$sudo a2ensite practica3.conf<br>
+                                    $service apache2 restart</p>
+                            </li>
+                            <li>
+                                COmo queremos que el index sea un Php hay que instalar el modulo de apache
+                                <p class="code">$sudo apt-get install apache2 php libapache2-mod-php</p>
+
+                            </li>
+                            <li>Vemos la web en localhost:82 para comprobar que lee el archivo Php<br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica03-03.png" alt="practica03-03"><br><br>
+                            </li>
+                            <li>
+                                Configuramos el practica.conf para indicar lo siguiente:<br>
+                                -El directorio donde se encuentra el contenido del sitio será /var/www/practica03<br>
+                                -Los logs se sitúan en el directorio /etc/logs/practica03<br>
+                                -Debe disponer de un fichero de log (log_personalizado.log) que mostrará la
+                                traza generada por un CustomLog cuyo formato será “%t %h %m %>s”<br>
+                                -Dispone de una página que se mostrará al acceder a una ruta que no exista.
+                                Esta mostrará un mensaje de “Este fichero no existe”.<br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica3-04.png" alt="practica3-04"><br><br>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        paso 2
+                    </li>
+                </ul>
+            </div>
+        </div>
+</body>
+
+</html>
