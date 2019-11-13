@@ -131,9 +131,45 @@
                             </li>
                         </ul>
                     </li>
+
+
                     <li>
-                        paso 2
+                        Creamos el un segundo sitio, este segundo sitio permitirá acceder a una aplicación NodeJs que
+                        debe estar
+                        ejecutándose en el puerto 3001 de nuestra máquina
+                        <ul>
+                            <li>
+                                <ul>Requisitos del sitio
+                                    <li>Estar publicado en el puerto 81</li>
+
+                                    <li>El directorio donde se encuentra el contenido del sitio será
+                                        /var/www/sitioNode</li>
+                                    <li>Los logs se sitúan en el directorio /etc/logs/sitioNode</li>
+
+                                </ul>
+                            <li>Configuramos el proxy <br>
+                                <p class="code">$sudo a2enmod proxy <br>
+                                    $sudo a2enmod proxy_http</p>
+                            </li>
+                            <img src="/2DAW_Despliegue.github.io/img/practica3-06.png" alt="practica3-06"><br><br>
                     </li>
+
+                    <li>Añadimos el Listen 81 en el archivo de configuración de puertos de apache:
+                        /etc/apache2/ports.conf.</li>
+
+
+                    <li>Arrancamos un servidor Nodejs en el pueto 3001 <br>
+                        <img src="/2DAW_Despliegue.github.io/img/practica3-05.png" alt="practica3-05"><br><br>
+                    </li>
+
+                    </li>
+
+                </ul>
+                </li>
+                <li>Ahora vamos a disponer de un directorio /public_files cuyo contenido se listará al acceder a
+                        http://localhost:81/public_files. El acceso a dicho directorio estará restringido
+                        a aquellos usuarios conocidos por el sistema. Las directivas necesarias estarán
+                        en un fichero .htaccess</li>
                 </ul>
             </div>
         </div>
