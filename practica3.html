@@ -161,15 +161,56 @@
                     <li>Arrancamos un servidor Nodejs en el pueto 3001 <br>
                         <img src="/2DAW_Despliegue.github.io/img/practica3-05.png" alt="practica3-05"><br><br>
                     </li>
+                    <li>
+                        Comprobamos que esta en marcha <br>
+                        <img src="/2DAW_Despliegue.github.io/img/practica3-07.png" alt="practica3-07"><br><br>
+                    </li>
 
                     </li>
 
                 </ul>
                 </li>
                 <li>Ahora vamos a disponer de un directorio /public_files cuyo contenido se listará al acceder a
-                        http://localhost:81/public_files. El acceso a dicho directorio estará restringido
-                        a aquellos usuarios conocidos por el sistema. Las directivas necesarias estarán
-                        en un fichero .htaccess</li>
+                    http://localhost:81/public_files. El acceso a dicho directorio estará restringido
+                    a aquellos usuarios conocidos por el sistema. Las directivas necesarias estarán
+                    en un fichero .htaccess</li>
+                    <ul>
+                        <li>Creamos la carpeta public_files y dentro 3 archivos html <br>
+                            <img src="/2DAW_Despliegue.github.io/img/practica3-08.png" alt="practica3-08"><br><br>
+                        </li>
+                        <li>
+                            Modificamos el sitioNode.conf para añadir un Alias para acceder a public files <br>
+                            <img src="/2DAW_Despliegue.github.io/img/practica3-10.png" alt="practica3-10"><br><br>
+                        </li>
+                        <li>Lo Comprobamos
+                            <img src="/2DAW_Despliegue.github.io/img/practica3-09.png" alt="practica3-09"><br><br>
+                        </li>
+                        <li>
+                            Para restringir el acceso al directorio a solo aquellos usuarios conocidos por el sistema, crearemos un fichero .htaccess en /var/www/sitioNode/public_files, con las siguientes directivas <br>
+                            <img src="/2DAW_Despliegue.github.io/img/practica3-12.png" alt="practica3-12"><br><br>                       
+
+                        </li>
+                        <li>Creamos el archivo calves.txt en /etc/apache con el siguiente comando <br>
+                        <p class="code">sudo htpasswd -c claves.txt guillermo</p>
+                        <img src="/2DAW_Despliegue.github.io/img/practica3-11.png" alt="practica3-11"><br><br> 
+                        En el archivo apache2.conf tenemos que tener la directiva AllowOverride All dentro de Directory de sitiosNode para que pueda sobreescribir
+                        </li>
+                        <li>
+                            Verificamos sintaxis, reiniciamos el servidor y comprobamos que funciona <br>
+                        </li>
+                    </ul>
+                    <li>
+                        <ul>Al acceder a http://localhost:81/documentación se producirá una redirección
+                                a la página oficial de nodejs (https://nodejs.org/en/)
+                            <li>
+                                Añadimos la directiva Redirect en el sitioNode.conf para qeu rediriga a las web de node al poner /documentacion <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica3-13.png" alt="practica3-13"><br><br> 
+                            </li>
+                            <li>Comprobamos que funciona <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica3-14.png" alt="practica3-14"><br><br> 
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

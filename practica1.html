@@ -64,15 +64,18 @@
                         propio en nuestra máquina
                         <ul>
                             <li>Instala y configura las dependencias necesarias<br>
-                                <p id="code">sudo apt-get update<br>
+                                <p class="code">sudo apt-get update<br>
                                     sudo apt-get install -y curl openssh-server ca-certificates</p>
                             </li>
                             <li>Añade el repositorio e instala el paquete<br>
-                                <p id="code">curl
+                                <p class="code">curl
                                     https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh |
-                                    sudo bash
+                                    sudo bash <br>
+                                    sudo EXTERNAL_URL="http://localhost:4000" apt-get install gitlab-ee
                                 </p>
+                                
                             </li>
+                            <li>NOs redirecciona a la pantalla de resetear la contraseña para el usuario root</li>
                         </ul>
                     </li>
                     <li>
