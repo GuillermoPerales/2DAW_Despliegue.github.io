@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Guillermo Perales</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="jumbotron text-center" id="jumbofix">
+        <h1>2º DAW Despliegue de Aplicaciones</h1>
+        <p>Practicas por: Guillermo Perales Marti</p>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Logo</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Practicas
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="practica1.html">Git Lab</a>
+                    <a class="dropdown-item" href="practica2.html">GitFlow</a>
+                    <a class="dropdown-item" href="practica3.html">Apache</a>
+                    <a class="dropdown-item" href="nginx.html">Nginx</a>
+
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4 col-sm">
+                <h3>Practica 4</h3>
+                <p><b>Documentar correctamente el proceso de instalación y configuración de un servidor Nginx que
+                        dispone de dos sitios web:</b></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-sm">
+
+                <ul style="list-style: upper-roman;">
+                    <li>Creas el fichero de configuracion asociado dentro de site-avaliable, para ello copiamos el
+                        archivo default <br>
+                        <p class="code">cd /etc/nginx/sites-avaliables <br>
+                            sudo cp default miSitio</p>
+                        <img src="/2DAW_Despliegue.github.io/img/practica4-01.png" alt="practica4-01"><br><br>
+                    </li>
+                    <li>Cambiamos el fichero de configuracion para poner que se escuche en el puerto 82 y la direccion
+                        sea /var/www/miSitio <br>
+                        <p class="code">sudo nano miSitio </p>
+                        <img src="/2DAW_Despliegue.github.io/img/practica4-02.png" alt="practica4-02"><br><br>
+                    </li>
+                    <li>Creamos el directorio con el contenido de nuestro sitio y lo habilitamos
+                         haciendo manualmente un enlace simbolico  de la carpeta sites-enabled con sites-avaliable <br>
+                         <img src="/2DAW_Despliegue.github.io/img/practica4-03.png" alt="practica4-03"><br><br>
+                         <p class="code">sudo ln -s /etc/nginx/sites-available/miSitio /etc/nginx/sites-enabled</p>
+                         <img src="/2DAW_Despliegue.github.io/img/practica4-04.png" alt="practica4-04"><br><br>
+                    </li>
+                    <li>
+                        
+                    </li>
+
+
+                </ul>
+
+            </div>
+        </div>
+
+</body>
+
+</html>
