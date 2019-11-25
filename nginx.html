@@ -60,28 +60,102 @@
             <div class="col-4 col-sm">
 
                 <ul style="list-style: upper-roman;">
-                    <li>Creas el fichero de configuracion asociado dentro de site-avaliable, para ello copiamos el
-                        archivo default <br>
-                        <p class="code">cd /etc/nginx/sites-avaliables <br>
-                            sudo cp default miSitio</p>
-                        <img src="/2DAW_Despliegue.github.io/img/practica4-01.png" alt="practica4-01"><br><br>
+                    <li>Primer Sitio
+                        <ul>
+
+                            <li>Creas el fichero de configuracion asociado dentro de site-avaliable, para ello copiamos
+                                el
+                                archivo default <br>
+                                <p class="code">cd /etc/nginx/sites-avaliables <br>
+                                    sudo cp default miSitio</p>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-01.png" alt="practica4-01"><br><br>
+                            </li>
+                            <li>Cambiamos el fichero de configuracion para poner que se escuche en el puerto 82 y la
+                                direccion
+                                sea /var/www/miSitio <br>
+                                <p class="code">sudo nano miSitio </p>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-02.png" alt="practica4-02"><br><br>
+                            </li>
+                            <li>Creamos el directorio con el contenido de nuestro sitio y lo habilitamos
+                                haciendo manualmente un enlace simbolico de la carpeta sites-enabled con sites-avaliable
+                                <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-03.png" alt="practica4-03"><br><br>
+                                <p class="code">sudo ln -s /etc/nginx/sites-available/miSitio /etc/nginx/sites-enabled
+                                </p>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-04.png" alt="practica4-04"><br><br>
+                            </li>
+                            <li>Situamos los log en la carpeta /etc/logs/miSitio <br>
+                                Para ello creamos la carpeta y añadimos la directiva access_logs en el archivo de
+                                configuracion.
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-05.png" alt="practica4-05"><br><br>
+                            </li>
+                            <li>Activar la compresion de los archivos que superen los 80k, para ello usaremos el modulo
+                                de
+                                HttpGzip que es un módulo de Nginx que se encarga de la compresión y
+                                descompresión "al vuelo" de ficheros. <br>
+                                Primero habilitaremos la directiva en el archivo de configuracion principal <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-06.png" alt="practica4-06"><br><br>
+
+                            </li>
+                            <li>
+                                Dispone de una página que se mostrará al acceder a una ruta que no exista.
+                                Esta página (404.html) estará situada en /var/www/errores
+                            </li>
+                        </ul>
                     </li>
-                    <li>Cambiamos el fichero de configuracion para poner que se escuche en el puerto 82 y la direccion
-                        sea /var/www/miSitio <br>
-                        <p class="code">sudo nano miSitio </p>
-                        <img src="/2DAW_Despliegue.github.io/img/practica4-02.png" alt="practica4-02"><br><br>
-                    </li>
-                    <li>Creamos el directorio con el contenido de nuestro sitio y lo habilitamos
-                         haciendo manualmente un enlace simbolico  de la carpeta sites-enabled con sites-avaliable <br>
-                         <img src="/2DAW_Despliegue.github.io/img/practica4-03.png" alt="practica4-03"><br><br>
-                         <p class="code">sudo ln -s /etc/nginx/sites-available/miSitio /etc/nginx/sites-enabled</p>
-                         <img src="/2DAW_Despliegue.github.io/img/practica4-04.png" alt="practica4-04"><br><br>
-                    </li>
-                    <li>
-                        
-                    </li>
+                    <li>Segundo Sitio
+                        <ul>
+                            <li>Creamos la aplicacion Node y la arrancams en el puerto 3001 <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-201.png" alt="practica4-201"><br><br>
+
+                            </li>Creamos el sitio con los siguientes prerrequisitos:
+                            <ul>
+                                <li>Estar publicado en el puerto 81</li>
+                                <li>El directorio donde se encuentra el contenido del sitio será
+                                    /var/www/sitioNode</li>
+                                <li>Los logs se sitúan en el directorio /etc/logs/sitioNode</li>
+                                <li>Dispone de una página que se mostrará al acceder a una ruta que no exista.
+                                    Esta página (404.html) estará situada en /var/www/errores</li>
+                                <li>Al acceder a http://localhost:81/documentación se producirá una redirección
+                                    a la página oficial de nodejs (https://nodejs.org/en/)</li>
+                            </ul>
+                            <li>Creamos el directorio donde estara el contenido del sitio y le otorgamos permisos <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-202.png" alt="practica4-202"><br><br>
+
+                            </li>
+                            <li>Creamos el archivo de configuracion copiando el default de Nginx <br>
+                            <p class="code">
+                                cd /etc/nginx/sites-available <br>
+                                sudo cp default sitioNginxNode</p>
+                            </li>
+                            <li>Y cambiamos las directivas necesarias para nuestra configuracion <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-203.png" alt="practica4-203"><br><br>
+                            </li>
+                            <li>
+                                Creamos el enlace simbolico a mano <br>
+                                <p class="code">sudo ln -s /etc/nginx/sites-available/sitioNginxNode /etc/nginx/sites-enabled
+                                    </p>
+                            </li>
+                            <li>Para situar los log en una carpeta concreta añadimos la directiva access_log a la configuracion <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-204.png" alt="practica4-204"><br><br>
+                            </li>
+
+                            <li>Para añadir una pagina que mostrar cuando se accede a un aruta que no existe, primero creamos la carpeta errores en /var/www/errores <br>
+                                alli creamos un archivo html con la pagina del error <br>
+                                Luego añadiremos la directiva error_page 404 a nuestra configuracion <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-205.png" alt="practica4-205"><br><br>
+                                Reiniciamos servidor y lo compraobamos <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-206.png" alt="practica4-206"><br><br>
 
 
+                            </li>
+                            <li>Para acceder al sito de Nodejs al entrar en /documentacion tenemos que añadir la directiva rewrite a la configuracion del sitio <br>
+                                <img src="/2DAW_Despliegue.github.io/img/practica4-207.png" alt="practica4-207"><br><br>
+                            
+                            </li>
+                        </ul>
+
+                    </li>
                 </ul>
 
             </div>
