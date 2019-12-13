@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Guillermo Perales</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="jumbotron text-center" id="jumbofix">
+        <h1>2º DAW Despliegue de Aplicaciones</h1>
+        <p>Practicas por: Guillermo Perales Marti</p>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Logo</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Practicas
+                </a>
+                <div class="dropdown-menu">
+
+                    <a class="dropdown-item" href="practica2.html">Git Flow</a>
+                    <a class="dropdown-item" href="practica3.html">Apache</a>
+
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4 col-sm">
+                <h3>Practica Docker</h3>
+                <p><b></b></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-sm">
+
+                <ul style="list-style: upper-roman;">Documentar correctamente y de forma clara (introducción, comandos
+                    ejecutados con la
+                    explicación de cada uno, capturas de pantalla, etc.) el proceso de creación de los siguientes
+                    contenedores
+                    <li>Un contenedor con una imagen de MYSQL con las siguientes características:
+                        <ul>Un contenedor con una imagen de MYSQL con las siguientes características:
+                            <li>Priemro vemos como gestionar las imagenes de Docker <br>
+                                <p class="code">sudo docker serach <i>texto_de_busqueda</i> </p>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-01.png" alt="docker-01"><br><br>
+                            </li>
+                            <li>Una vez encontrada, podemos descargarla con <br>
+                                <p class="code">sudo docker image pull <i>nombre_de_la_imagen</i></p>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-02.png" alt="docker-02"><br><br>
+                            </li>
+                            <li>Accesible a través del puerto 3306 <br>
+                                Debe disponer de las siguientes variables de entorno<br>
+                                1. MYSQL_ROOT_PASSWORD: 12345678<br>
+                                2. MYSQL_DATABASE: wordpress<br>
+                                3. MYSQL_USER: wordpress<br>
+                                4. MYSQL_PASSWORD: wordpress <br>
+                                <p class="code">sudo docker run -d -p 3306 --name fixMysql -e
+                                    MYSQL_ROOT_PASSWORD=12345678 -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e
+                                    MYSQL_PASSWORD=wordpress mysql</p>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-03.png" alt="docker-03"><br><br>
+                            </li>
+
+                            <li> Debe disponer de un named data volumen denominado vol_mysql asociado al path
+                                /var/lib/mysql del contenedor
+                                <ul>
+                                    <li>Creamos un named data volume <br>
+                                        <p class="code">sudo docker volume create --name vol_mysql</p>
+                                        <img src="/2DAW_Despliegue.github.io/img/docker/docker-05.png"
+                                            alt="docker-05"><br><br>
+                                    </li>
+                                    <li>Primero eliminamos el anterior container para volverlo a montar y añadirle el
+                                        volumen <br>
+                                        <p class="code">sudo docker rm <i>id_contenedor</i> -f</p>
+                                        Luego introducimos el comando para crear el contenedor añadiendo el comando para
+                                        el volumen <br>
+                                        <p class="code">
+                                            sudo docker run -d -p 3306 --name fixMysql -e MYSQL_ROOT_PASSWORD=12345678
+                                            -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e
+                                            MYSQL_PASSWORD=wordpress -v vol_mysql:/var/lib/mysql mysql</p>
+                                        <img src="/2DAW_Despliegue.github.io/img/docker/docker-06.png"
+                                            alt="docker-06"><br><br>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Acceso a la red con nombre my_net <br>
+                                <p class="code">sudo docker network create my_net</p>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-04.png" alt="docker-04"><br><br>
+                                <p>Luego le damos acceso a la red al contenedor que hemos creado</p>
+                                <p class="code">sudo docker network connect my_net fixMysql</p>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-07.png" alt="docker-07"><br><br>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        paso 2
+                    </li>
+                </ul>
+            </div>
+        </div>
+</body>
+
+</html>
