@@ -61,7 +61,7 @@
                     explicación de cada uno, capturas de pantalla, etc.) el proceso de creación de los siguientes
                     contenedores
                     <li>Un contenedor con una imagen de MYSQL con las siguientes características:
-                        <ul>Un contenedor con una imagen de MYSQL con las siguientes características:
+                        <ul>
                             <li>Priemro vemos como gestionar las imagenes de Docker <br>
                                 <p class="code">sudo docker serach <i>texto_de_busqueda</i> </p>
                                 <img src="/2DAW_Despliegue.github.io/img/docker/docker-01.png" alt="docker-01"><br><br>
@@ -96,9 +96,9 @@
                                         Luego introducimos el comando para crear el contenedor añadiendo el comando para
                                         el volumen <br>
                                         <p class="code">
-                                            sudo docker run -d -p 3306 --name fixMysql -e MYSQL_ROOT_PASSWORD=12345678
+                                            sudo docker run -d -p 3306:3306 --name fixMysql -e MYSQL_ROOT_PASSWORD=12345678
                                             -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e
-                                            MYSQL_PASSWORD=wordpress -v vol_mysql:/var/lib/mysql mysql</p>
+                                            MYSQL_PASSWORD=wordpress -v vol_mysql:/var/lib/mysql mysql:5.7</p>
                                         <img src="/2DAW_Despliegue.github.io/img/docker/docker-06.png"
                                             alt="docker-06"><br><br>
                                     </li>
@@ -113,6 +113,45 @@
                             </li>
 
                         </ul>
+                    </li>
+                    <li>Un contenedor con una imagen de Wordpress con las siguientes
+                        características:
+                        <ul>
+                            <li>Nos descargamos la imagen de Wordpress
+                                <p class="code">sudo docker image pull wordpress</p>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-08.png" alt="docker-08"><br><br>
+
+                            </li>
+                            <li>Creamos un named data volume <br>
+                                <p class="code">sudo docker volume create --name vol_wordpress</p>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-09.png"
+                                    alt="docker-09"><br><br>
+                            </li>
+                            <li>Accesible a través del puerto 80 <br>
+                                Debe disponer de las siguientes variables de entorno <br>
+                                1. WORDPRESS_DB_HOST: 127.0.0.1:3306 <br>
+                                <p class="code">sudo docker inspect <i>container_mysql</i> (y buscamos la IP del contenedor de mysql=>172.19.0.2)</p>
+                                2. WORDPRESS_DB_USER: wordpress <br>
+                                3. WORDPRESS_DB_PASSWORD: wordpress <br>
+                                4. WORDPRESS_DB_NAME: wordpress <br>
+                                Acceso a la red con nombre my_net <br>
+                                Debe disponer de un named data volumen denominado vol_wordpress asociado al
+                                path /var/www/html del contenedor
+                                <p class="code">
+                                    sudo docker run -d -p 80:80 --name fixWordpress -e WORDPRESS_DB_HOST=172.19.0.2:3306
+                                    -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress -v
+                                    vol_wordpress:/var/www/html --network my_net wordpress</p>
+                                    <img src="/2DAW_Despliegue.github.io/img/docker/docker-10.png"
+                                    alt="docker-10"><br><br>
+                            </li>
+                            <li>Comprobamos e instalamos
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-10.png"
+                                alt="docker-10"><br><br>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-11.png"
+                                alt="docker-11"><br><br>
+                            </li>
+                        </ul>
+
                     </li>
                     <li>
                         paso 2
