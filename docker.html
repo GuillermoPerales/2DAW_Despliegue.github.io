@@ -96,7 +96,8 @@
                                         Luego introducimos el comando para crear el contenedor añadiendo el comando para
                                         el volumen <br>
                                         <p class="code">
-                                            sudo docker run -d -p 3306:3306 --name fixMysql -e MYSQL_ROOT_PASSWORD=12345678
+                                            sudo docker run -d -p 3306:3306 --name fixMysql -e
+                                            MYSQL_ROOT_PASSWORD=12345678
                                             -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e
                                             MYSQL_PASSWORD=wordpress -v vol_mysql:/var/lib/mysql mysql:5.7</p>
                                         <img src="/2DAW_Despliegue.github.io/img/docker/docker-06.png"
@@ -124,13 +125,13 @@
                             </li>
                             <li>Creamos un named data volume <br>
                                 <p class="code">sudo docker volume create --name vol_wordpress</p>
-                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-09.png"
-                                    alt="docker-09"><br><br>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-09.png" alt="docker-09"><br><br>
                             </li>
                             <li>Accesible a través del puerto 80 <br>
                                 Debe disponer de las siguientes variables de entorno <br>
                                 1. WORDPRESS_DB_HOST: 127.0.0.1:3306 <br>
-                                <p class="code">sudo docker inspect <i>container_mysql</i> (y buscamos la IP del contenedor de mysql=>172.19.0.2)</p>
+                                <p class="code">sudo docker inspect <i>container_mysql</i> (y buscamos la IP del
+                                    contenedor de mysql=>172.19.0.2)</p>
                                 2. WORDPRESS_DB_USER: wordpress <br>
                                 3. WORDPRESS_DB_PASSWORD: wordpress <br>
                                 4. WORDPRESS_DB_NAME: wordpress <br>
@@ -139,22 +140,41 @@
                                 path /var/www/html del contenedor
                                 <p class="code">
                                     sudo docker run -d -p 80:80 --name fixWordpress -e WORDPRESS_DB_HOST=172.19.0.2:3306
-                                    -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress -v
+                                    -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e
+                                    WORDPRESS_DB_NAME=wordpress -v
                                     vol_wordpress:/var/www/html --network my_net wordpress</p>
-                                    <img src="/2DAW_Despliegue.github.io/img/docker/docker-10.png"
-                                    alt="docker-10"><br><br>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-10.png" alt="docker-10"><br><br>
                             </li>
                             <li>Comprobamos e instalamos
-                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-10.png"
-                                alt="docker-10"><br><br>
-                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-11.png"
-                                alt="docker-11"><br><br>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-10.png" alt="docker-10"><br><br>
+                                <img src="/2DAW_Despliegue.github.io/img/docker/docker-11.png" alt="docker-11"><br><br>
                             </li>
                         </ul>
 
                     </li>
                     <li>
-                        paso 2
+                        Crear, por medio de un dockerfile, una imagen basada en una de Ubuntu en la
+                        que:ç
+                        <ul>
+                            Se instale un servidor apache. <br>
+                            Se copie el fichero de configuración del sitio principal desde el contexto de docker
+                                (directorio donde se encuentra el dockerfile). En dicho fichero de configuración se
+                                establecerá una página de inicio (index.html) y otra de error (404.html) que se
+                                obtendrán también desde el contexto de docker. <br>
+                            Al arrancar esta imagen en un contenedor se debe configurar un volumen que permita
+                                acceder a los logs de apache desde el host origen.
+                                <li>
+                                    Primero bajamos la imagen de Ubuntu
+                                    <p class="code">sudo docker image pull ubuntu</p>
+                                    <img src="/2DAW_Despliegue.github.io/img/docker/docker-13.png" alt="docker-13"><br><br>
+                                </li>
+                                <li>
+                                    Creamos una carpeta donde pondremos el contexto de Docker y alli copiamos el archivo de configuracion por defecto de apache 000-default.conf <br>
+                                    Alli tambien creamos el index.html y el 404.html
+
+
+                                </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

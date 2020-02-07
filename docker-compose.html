@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Guillermo Perales</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="jumbotron text-center" id="jumbofix">
+        <h1>2º DAW Despliegue de Aplicaciones</h1>
+        <p>Practicas por: Guillermo Perales Marti</p>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Logo</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Practicas
+                </a>
+                <div class="dropdown-menu">
+
+                    <a class="dropdown-item" href="practica2.html">Git Flow</a>
+                    <a class="dropdown-item" href="practica3.html">Apache</a>
+                    <a class="dropdown-item" href="docker.html">Docker</a>
+
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4 col-sm">
+                <h3>Docker-compose</h3>
+                <p><b>En esta practica, vamos a realizar el proceso de creación en docker-compose de un sistema
+                        de monitorización de logs en graylog para un wordpress.</b></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-sm">
+
+                <ul style="list-style: upper-roman;">
+                    <li>
+                        <ul>Elastic Search
+                            <li>
+                                Creamos el servicio de ElasticSearch con las siguientes propiedades: <br>
+                                Nombre del servicio: elasticsearch<br>
+                                Imagen: docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.2<br>
+                                Variables de entorno (debéis averiguar los valores asociados)<br>
+                                -http.host<br>
+                                -network.host<br>
+                                -transport.host<br>
+                                -ES_JAVA_OPTS<br>
+                                Volumen asociado a /usr/share/elasticsearch/data<br>
+                                Pertenece a la red "practica_network”<br>
+                                Dispone de healthcheck (averiguar qué instrucción puede ser útil para verificar el
+                                estado de
+                                salud del servicio)<br>
+                                Otras propiedades<br>
+                                ulimits:<br>
+                                memlock:<br>
+                                soft: -1<br>
+                                hard: -1<br>
+
+                                <img src="/2DAW_Despliegue.github.io/img/composer/imagen-06.png"
+                                    alt="imangen-06"><br><br>
+
+                            </li>
+                            <li>Comprobamos que funciona y esta en marcha
+                                <img src="/2DAW_Despliegue.github.io/img/composer/imagen-01.png"
+                                    alt="imangen-01"><br><br>
+                            </li>
+                        </ul>
+                        <ul>Mongo
+                            <li>
+                                Imagen: mongo:3 <br>
+                                Volumen asociado a /data/db <br>
+                                Tanto el servicio expone en el puerto 27017, como el host publica en este mismo. <br>
+                                Pertenece a la red "practica_network” <br>
+                                Dispone de healthcheck (averiguar qué instrucción puede ser útil para verificar el
+                                estado de
+                                salud del servicio) <br>
+                                <img src="/2DAW_Despliegue.github.io/img/composer/imagen-07.png"
+                                    alt="imangen-07"><br><br>
+                            </li>
+                            <li>Comprobamos que funciona
+                                <img src="/2DAW_Despliegue.github.io/img/composer/imagen-02.png"
+                                    alt="imangen-02"><br><br>
+
+                            </li>
+                        </ul>
+                        <ul>Graylog
+                            <li>
+                                Imagen: graylog/graylog:3.1<br>
+                                Variables de entorno (debéis averiguar los valores asociados)<br>
+                                -GRAYLOG_PASSWORD_SECRET<br>
+                                -GRAYLOG_ROOT_PASSWORD_SHA2<br>
+                                -GRAYLOG_HTTP_EXTERNAL_URI<br>
+                                Volumen asociado a /usr/share/elasticsearch/data<br>
+                                El servicio se reinicia en caso de fallo<br>
+                                Pertenece a la red "practica_network”<br>
+                                Depende de los servicios de mongo y elasticsearch<br>
+                                Publica en los siguientes puertos<br>
+                                -9000 -> 9000<br>
+                                -12201 -> 12201 (udp)<br>
+                                -12201 -> 12201<br>
+                                -1514 -> 1514<br>
+                                -1514 -> 1514 (udp)<br>
+                                <img src="/2DAW_Despliegue.github.io/img/composer/imagen-08.png"
+                                    alt="imangen-08"><br><br>
+                            </li>
+                            <li>Comprobamos que funciona
+                                <img src="/2DAW_Despliegue.github.io/img/composer/imagen-03.png"
+                                    alt="imangen-03"><br><br>
+
+                            </li>
+                        </ul>
+                        <ul>Mysql
+                            <li>
+                                Nombre del servicio: mysql<br>
+                                Imagen: mysql:5.7<br>
+                                Volumen asociado a /var/lib/mysql<br>
+                                Variables de entorno (debéis averiguar los valores asociados)<br>
+                                -MYSQL_ROOT_PASSWORD<br>
+                                -MYSQL_DATABASE<br>
+                                -MYSQL_USER<br>
+                                -MYSQL_PASSWORD<br>
+                                Pertenece a la red "practica_network”<br>
+                                Dispone de healthcheck (averiguar qué instrucción puede ser útil para verificar el
+                                estado de
+                                salud del servicio)<br>
+                                <img src="/2DAW_Despliegue.github.io/img/composer/imagen-09.png"
+                                    alt="imangen-09"><br><br>
+                            </li>
+                        </ul>
+                        <ul>Wordpress
+                            <li>
+                                Nombre del servicio: wordpress<br>
+                                Imagen: wordpress:latest<br>
+                                Variables de entorno (debéis averiguar los valores asociados)<br>
+                                -WORDPRESS_DB_HOST<br>
+                                -WORDPRESS_DB_USER<br>
+                                -WORDPRESS_DB_PASSWORD<br>
+                                -WORDPRESS_DB_NAME<br>
+                                Volumen asociado a /var/www/html<br>
+                                El servicio se reinicia en caso de fallo<br>
+                                Pertenece a la red "practica_network”<br>
+                                Depende del servicio de mysql<br>
+                                Publica en los siguientes puertos<br>
+                                -9090 -> 80<br>
+                                Dispone de un sistema de logging (investigar cómo hacerlo) cuyo driver es gelf y con las
+                                siguientes opciones:<br>
+                                - gelf-address: udp://localhost:12201<br>
+                                -tag : primeros_logs<br>
+
+                                <img src="/2DAW_Despliegue.github.io/img/composer/imagen-10.png"
+                                    alt="imangen-10"><br><br>
+                            </li>
+
+                            <li>Comprobamos que funciona
+                                <img src="/2DAW_Despliegue.github.io/img/composer/imagen-5.png"
+                                    alt="imangen-5"><br><br>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+</body>
+
+</html>
