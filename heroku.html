@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Guillermo Perales</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="jumbotron text-center" id="jumbofix">
+        <h1>2º DAW Despliegue de Aplicaciones</h1>
+        <p>Practicas por: Guillermo Perales Marti</p>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Logo</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Practicas
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="practica1.html">Git Lab</a>
+                    <a class="dropdown-item" href="practica2.html">GitFlow</a>
+                    <a class="dropdown-item" href="practica3.html">Apache</a>
+                    <a class="dropdown-item" href="nginx.html">Nginx</a>
+                    <a class="dropdown-item" href="docker.html">Docker</a>
+                    <a class="dropdown-item" href="docker-compose.html">Docker-Compose</a>
+                    <a class="dropdown-item" href="heroku.html">Heroku</a>
+
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4 col-sm">
+                <ul style="list-style: upper-roman;">
+                    <ul>Documentar correctamente y de forma clara (crear app de Heroku, configuración de variables,
+                        Procfile, configuración de Add-ons necesarios, etc.) el proceso de despliegue en Heroku de
+                        alguna de las aplicaciones que hayáis (o estéis) desarrollando en el módulo de Desarrollo Web
+                        en Entorno Servidor.
+                        <li><b>Introducción sobre Heroku</b>
+                            <ul>
+                                <li>Heroku es una plataforma como servicio de computación en la Nube que soporta
+                                    distintos lenguajes de programación.</li>
+                                <li>Los Dynos son piezas fundamentales del modelo de arquitectura de Heroku, son las
+                                    unidades que proveen capacidad de cómputo dentro de la plataforma. Están basados en
+                                    Contenedores Linux.
+
+                                    Cada Dyno está aislado del resto, por lo que los comandos que se ejecutan y los
+                                    archivos que se almacenan en un Dyno, no afectan a los otros. Además cada Dyno
+                                    provee el ambiente requerido por las aplicaciones para ser ejecutadas.
+
+                                    Los posibles comandos a ser ejecutados en los dynos incluyen procesos web, o
+                                    cualquier otro tipo de proceso definido en el archivo Procfile de la aplicación.
+                                    Este es un archivo de texto ubicado en el directorio raíz de la aplicación, y es el
+                                    mecanismo provisto para la declaración de comandos que luego correrán los dynos.
+                                    Básicamente, consiste de una lista de tipos de procesos de la aplicación. Cada tipo
+                                    de procesos constituye una declaración de un comando.</li>
+                                <ul><b>Principales caracteristicas</b>
+                                    <li>Elasticidad y crecimiento. La cantidad de Dynos asignados a una aplicación se
+                                        puede cambiar en cualquier momento a través de la línea de comandos o el
+                                        dashboard.</li>
+                                    <li>Tamaño. Heroku ofrece diferentes tipos de dynos, cada uno con diferentes
+                                        capacidades de procesamiento y memoria.</li>
+                                    <li>Routing. Internamente los routers realizan un seguimiento de la ubicación de los
+                                        Dynos que estén corriendo, y redirigen el tráfico de acuerdo a la misma.</li>
+                                    <li>Seguimiento. Existe un manejador de Dynos, el cual monitorea de forma continua
+                                        los dynos que se estén ejecutando. En caso de una falla en un Dyno, este es
+                                        eliminado y creado nuevamente.</li>
+                                    <li>Distribución y redundancia. Los Dynos se encuentran aislados uno de otro. Esto
+                                        implica que de existir fallos en la infraestructura interna de alguno de ellos,
+                                        los otros dynos no se ven afectados, y consecuentemente tampoco la aplicación.
+                                    </li>
+
+                                </ul>
+
+                            </ul>
+
+                        </li>
+                        <li>Creacion de la aplicación
+                            <ul>
+                                <li>Instalacion Heroku CLI<br>
+                                    <p class="code">sudo snap install --classic heroku</p>
+                                    <img src="/2DAW_Despliegue.github.io/img/heroku/imagen-01.png" alt="imagen-01"><br><br>
+                                </li>
+                                <li>Crear una app Heroku <br>
+                                <p class="code">heroku create</p>
+                                <img src="/2DAW_Despliegue.github.io/img/heroku/imagen-02.png" alt="imagen-02"><br><br>
+                                </li>
+                                <li>Creamos el Procfile para la app <br>
+                                <p class="code">echo "web: vendor/bin/heroku-php-apache2 public/" > Procfile <br>
+                                    git add . <br>
+                                    git commit -m "Procfile for Heroku"</p>
+                               
+                                <img src="/2DAW_Despliegue.github.io/img/heroku/imagen-03.png" alt="imagen-03"><br><br>
+                                </li>
+                                <li>Añadimos la app key de laravel a la config de heroku usando un comnado <br>
+                                <p class="code">heroku config:set APP_KEY=…</p>
+                                <img src="/2DAW_Despliegue.github.io/img/heroku/imagen-04.png" alt="imagen-04"><br><br>
+                                </li>
+                                <li>Hacemos el push a Heroku
+                                    <p class="code">git push heroku master</p>
+                                    <img src="/2DAW_Despliegue.github.io/img/heroku/imagen-05.png" alt="imagen-05"><br><br>
+                                </li>
+                                <li>Arbimos la aplicacion
+                                    <p class="code">heroku open</p>
+                                    <img src="/2DAW_Despliegue.github.io/img/heroku/imagen-06.png" alt="imagen-06"><br><br>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+
+                </ul>
+            </div>
+        </div>
+
+</body>
+
+</html>
